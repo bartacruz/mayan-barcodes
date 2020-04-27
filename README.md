@@ -7,11 +7,12 @@ Uses PIL and pyzbar to scan for bar and QR codes into uploaded documents, and st
 
 ## Install
 
-Install requirements (into the Mayan virtualenv) using requirements.txt
-
-Add 'mayan-barcodes' to INSTALLED_APPS
-
-Run migration for mayan-barcodes
+0. Get the code (d'oh!)
+1. Add the path where you installed it to the PYTHONPATH in Mayan's scripts.
+2. Activate the Mayan virtualenv
+3. Install requirements (Pillow and pyzbar) with pip using requirements.txt
+4. Add 'mayan_barcodes' to INSTALLED_APPS, tipically in mayan/settings/base.py or any other settings file.
+5. Run migration for mayan-barcodes (manage.py migrate mayan_barcodes)
 
 ## Usage
 
