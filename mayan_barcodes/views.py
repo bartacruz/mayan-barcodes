@@ -27,7 +27,7 @@ from mayan.apps.common.generics import SingleObjectListView,\
 from mayan_barcodes.permissions import permission_barcodes_view,\
     permission_barcodes_setup
 from mayan_barcodes.icons import icon_document_barcodes
-from mayan_barcodes.models import Barcode
+from mayan_barcodes.models import Barcode, DocumentTypeSettings
 from mayan.apps.common.mixins import ExternalObjectMixin
 from mayan.apps.documents.models.document_models import Document
 from mayan.apps.documents.models.document_type_models import DocumentType
@@ -98,5 +98,8 @@ class DocumentTypeSettingsEditView(ExternalObjectMixin, SingleObjectEditView):
         }
 
     def get_object(self, queryset=None):
-        return self.get_document_type().barcode_settings
+        try:
+            return self.get_document_type().barcode_settings
+        except:
+            return DocumentTypeSettings.objects.create(document_type=self.get_document_type())
 
