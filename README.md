@@ -53,6 +53,9 @@ Examples:
 ```
 
 ## Credits
-Some code borrowed and then modified from the beautiful [Mayan EDMS](https://www.mayan-edms.com) which is licensed under Apache License 2.0. 
+(c) Copyroght 2020 - Julio Santa Cruz <bartacruz@gmail.com>
+Released under the GPLv3 License. A copy of that licencse is in the [COPYING](COPYING) file.
+
+Some code borrowed and then modified from the beautiful [Mayan EDMS](https://www.mayan-edms.com) which is licensed under the Apache License 2.0. 
 
 
