@@ -82,7 +82,7 @@ class MayanBarcodesConfig(MayanAppConfig):
             name='submit_for_scan', value=method_document_scan
         )
         DocumentVersion.add_to_class(
-            name='ocr_content', value=get_document_version_barcodes
+            name='barcodes', value=get_document_version_barcodes
         )
         
         ModelEventType.register(

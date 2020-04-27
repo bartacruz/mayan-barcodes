@@ -37,7 +37,7 @@ class DocumentTypeSettings(models.Model):
       to=DocumentType,
       unique=True,
       verbose_name='Document type')
-    auto_scan = models.BooleanField(default=True,
+    auto_scan = models.BooleanField(default=False,
       verbose_name=(_('Automatically queue newly created documents for barcode scan.')))
 
     class Meta:
