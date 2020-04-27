@@ -20,14 +20,14 @@ Go to System->Configuration->Document Types. For each DocumentType you'll see a 
 Setup the document types that you want to be scanned.
 
 <img src="/docs/setup_document_type1.png" />
-<img src="/docs/setup_document_type2.png" />
+<img src="/docs/setup_documenttype2.png" />
 
 And you're ready to go!
 
 Upload a file of a type that has scanning enabled, and the scanned barcodes will be displayed in the document page.
 
 <img src="/docs/document_barcodes1.png" />
-<img src="/docs/document_barcodes2.png" />
+<img src="/docs/document_barcodes_list.png" />
 
 ### Acessing barcodes
 Barcodes of a document, document version, or page are accessible via the {{{barcodes }}} tag.
