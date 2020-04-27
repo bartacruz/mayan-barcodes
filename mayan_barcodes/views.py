@@ -21,9 +21,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 '''
 from django.utils.translation import ugettext_lazy as _
+from django.contrib import messages
 
 from mayan.apps.common.generics import SingleObjectListView,\
-    SingleObjectEditView
+    SingleObjectEditView, FormView
 from mayan_barcodes.permissions import permission_barcodes_view,\
     permission_barcodes_setup
 from mayan_barcodes.icons import icon_document_barcodes
@@ -31,7 +32,9 @@ from mayan_barcodes.models import Barcode, DocumentTypeSettings
 from mayan.apps.common.mixins import ExternalObjectMixin
 from mayan.apps.documents.models.document_models import Document
 from mayan.apps.documents.models.document_type_models import DocumentType
-from django.urls.base import reverse_lazy
+from django.urls.base import reverse_lazy, reverse
+from django.http.response import HttpResponseRedirect
+from mayan.apps.documents.forms.document_type_forms import DocumentTypeFilteredSelectForm
 
 
 class BarcodeListView(SingleObjectListView):
@@ -103,3 +106,36 @@ class DocumentTypeSettingsEditView(ExternalObjectMixin, SingleObjectEditView):
         except:
             return DocumentTypeSettings.objects.create(document_type=self.get_document_type())
 
+class DocumentTypeSubmitView(FormView):
+    extra_context = {
+        'title': _('Submit all documents of a type for barcode scanning')
+    }
+    form_class = DocumentTypeFilteredSelectForm
+    post_action_redirect = reverse_lazy(viewname='common:tools_list')
+
+    def form_valid(self, form):
+        count = 0
+        for document_type in form.cleaned_data['document_type']:
+            for document in document_type.documents.all():
+                document.submit_for_scan()
+                count += 1
+
+        messages.success(
+            message=_(
+                '%(count)d documents added to the OCR queue.'
+            ) % {
+                'count': count,
+            }, request=self.request
+        )
+
+        return HttpResponseRedirect(redirect_to=self.get_success_url())
+
+    def get_form_extra_kwargs(self):
+        return {
+            'allow_multiple': True,
+            'permission': permission_barcodes_setup,
+            'user': self.request.user
+        }
+
+    def get_post_action_redirect(self):
+        return reverse(viewname='common:tools_list')

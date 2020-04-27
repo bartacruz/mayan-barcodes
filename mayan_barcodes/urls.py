@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 '''
 from django.conf.urls import url
 from .views import DocumentTypeSettingsEditView, DocumentBarcodeListView
+from mayan_barcodes.views import DocumentTypeSubmitView
 
 urlpatterns = [
 url(
@@ -33,5 +34,10 @@ url(
         regex=r'^documents/(?P<document_id>\d+)/barcodes/$',
         name='document_barcodes', view=DocumentBarcodeListView.as_view()
     ),
+    url(
+        regex=r'^document_types/submit/$', name='document_type_submit',
+        view=DocumentTypeSubmitView.as_view()
+    ),
+    
     
 ]    
