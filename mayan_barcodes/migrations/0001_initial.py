@@ -3,6 +3,22 @@
 from django.db import migrations, models
 import django.db.models.deletion
 
+def create_settings(apps, schema_editor):
+    DocumentType = apps.get_model(
+        app_label='documents', model_name='DocumentType'
+    )
+    DocumentTypeSettings = apps.get_model(
+        app_label='mayan_barcodes', model_name='DocumentTypeSettings'
+    )
+
+    for document_type in DocumentType.objects.using(schema_editor.connection.alias).all():
+        try:
+            DocumentTypeSettings.objects.using(
+                schema_editor.connection.alias
+            ).create(document_type=document_type)
+        except DocumentTypeSettings.DoesNotExist:
+            pass
+
 
 class Migration(migrations.Migration):
 
@@ -17,7 +33,7 @@ class Migration(migrations.Migration):
             name='DocumentTypeSettings',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('auto_scan', models.BooleanField(default=True, verbose_name='Automatically queue newly created documents for barcode scan.')),
+                ('auto_scan', models.BooleanField(default=False, verbose_name='Automatically queue newly created documents for barcode scan.')),
                 ('document_type', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='barcode_settings', to='documents.DocumentType', verbose_name='Document type')),
             ],
             options={
@@ -37,5 +53,8 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Document page barcodes',
                 'verbose_name_plural': 'Document pages barcodes',
             },
+        ),
+        migrations.RunPython(
+            code=create_settings
         ),
     ]
