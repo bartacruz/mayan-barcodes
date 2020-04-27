@@ -27,9 +27,12 @@ And you're ready to go!
 
 Upload a file of a type that has scanning enabled, and the scanned barcodes will be displayed in the document page.
 
-An icon shows in the vertical toolbar <img src="/docs/document_barcodes1.png" style="display:inline" />
+An icon shows in the vertical toolbar 
+
+<img src="/docs/document_barcodes1.png" style="text-align:center" />
 
 The barcodes show in a page like this:
+
 <img src="/docs/document_barcodes_list.png" />
 
 ### Batch Scan
