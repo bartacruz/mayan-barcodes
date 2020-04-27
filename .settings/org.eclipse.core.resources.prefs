@@ -1,0 +1,15 @@
+eclipse.preferences.version=1
+encoding//mayan_barcodes/admin.py=utf-8
+encoding//mayan_barcodes/apps.py=utf-8
+encoding//mayan_barcodes/events.py=utf-8
+encoding//mayan_barcodes/handlers.py=utf-8
+encoding//mayan_barcodes/icons.py=utf-8
+encoding//mayan_barcodes/links.py=utf-8
+encoding//mayan_barcodes/managers.py=utf-8
+encoding//mayan_barcodes/methods.py=utf-8
+encoding//mayan_barcodes/models.py=utf-8
+encoding//mayan_barcodes/permissions.py=utf-8
+encoding//mayan_barcodes/signals.py=utf-8
+encoding//mayan_barcodes/urls.py=utf-8
+encoding//mayan_barcodes/utils.py=utf-8
+encoding//mayan_barcodes/views.py=utf-8

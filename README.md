@@ -27,11 +27,19 @@ And you're ready to go!
 
 Upload a file of a type that has scanning enabled, and the scanned barcodes will be displayed in the document page.
 
-<img src="/docs/document_barcodes1.png" />
+An icon shows in the vertical toolbar <img src="/docs/document_barcodes1.png" style="display:inline" />
+
+The barcodes show in a page like this:
 <img src="/docs/document_barcodes_list.png" />
 
+### Batch Scan
+In the *Tools* menu, you'll find an action called *Scan barcodes per document type*, 
+very similar to the one used for OCR or process File Metadata.
+
+It let's you choose the Document Types and then it batch process them.
+
 ### Acessing barcodes
-Barcodes of a document, document version, or page are accessible via the {{{barcodes }}} tag.
+Barcodes of a document, document version, or page are accessible via the `barcodes` tag.
 <img src="/docs/sandbox.png" />
 Examples:
 ```
@@ -46,11 +54,15 @@ Examples:
 # The same applies to document_version
 {{ document.latest_version.barcodes.first }}
 {% for barcode in document.latest_version.barcodes %}Barcode {{ barcode.data }}
-{% endif %}}
+{% endfor %}
 
-# Document pages "barcodes" is not a queryset but a relatedmanager, so you need to cal "all()"
+# Document pages `barcodes` is not a queryset but a RelatedManager, so you need to call `all()`
+# if you want to access all the barcodes.
 {{ document.latest_version.pages.last.barcodes.all }}
+# But its the same for getting single barcodes
+{{ document.latest_version.pages.last.barcodes.first }}
 ```
+
 
 ## Credits
 (c) Copyroght 2020 - Julio Santa Cruz <bartacruz@gmail.com>
